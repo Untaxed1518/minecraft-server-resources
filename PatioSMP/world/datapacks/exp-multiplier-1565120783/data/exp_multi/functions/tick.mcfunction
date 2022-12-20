@@ -1,0 +1,1 @@
+execute as @e[type=experience_orb,tag=!exp_multi_proc] run function exp_multi:multiply_exp
