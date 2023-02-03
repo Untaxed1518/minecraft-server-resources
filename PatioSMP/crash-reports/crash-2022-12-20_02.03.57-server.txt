@@ -1,0 +1,206 @@
+---- Minecraft Crash Report ----
+// I bet Cylons wouldn't have this problem.
+
+Time: 2022-12-20 02:03:57
+Description: Exception in server tick loop
+
+java.util.concurrent.CompletionException: java.nio.file.AccessDeniedException: ./world/region/r.-1.0.mca
+	at Not Enough Crashes deobfuscated stack trace.(1.19.2+build.28)
+	at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:332)
+	at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:347)
+	at java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:636)
+	at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:510)
+	at java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:2162)
+	at com.ishland.c2me.rewrites.chunkio.common.C2MEStorageThread.scheduleChunkRead(C2MEStorageThread.java:310)
+	at com.ishland.c2me.rewrites.chunkio.common.C2MEStorageThread.handlePendingReads(C2MEStorageThread.java:207)
+	at com.ishland.c2me.rewrites.chunkio.common.C2MEStorageThread.run(C2MEStorageThread.java:91)
+Caused by: java.nio.file.AccessDeniedException: ./world/region/r.-1.0.mca
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:90)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:181)
+	at java.nio.channels.FileChannel.open(FileChannel.java:298)
+	at java.nio.channels.FileChannel.open(FileChannel.java:357)
+	at net.minecraft.world.storage.RegionFile.<init>(RegionFile:128)
+	at net.minecraft.world.storage.RegionFile.<init>(RegionFile:111)
+	at net.minecraft.world.storage.RegionBasedStorage.getRegionFile(RegionBasedStorage:44)
+	at net.minecraft.world.storage.RegionBasedStorage.invokeGetRegionFile(RegionBasedStorage)
+	at com.ishland.c2me.rewrites.chunkio.common.C2MEStorageThread.scheduleChunkRead(C2MEStorageThread.java:281)
+	... 2 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- System Details --
+Details:
+	Minecraft Version: 1.19.2
+	Minecraft Version ID: 1.19.2
+	Operating System: Linux (amd64) version 5.15.0-1025-gcp
+	Java Version: 17.0.5, Private Build
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Private Build
+	Memory: 785293616 bytes (748 MiB) / 1168113664 bytes (1114 MiB) up to 4294967296 bytes (4096 MiB)
+	CPUs: 2
+	Processor Vendor: AuthenticAMD
+	Processor Name: AMD EPYC 7B13
+	Identifier: AuthenticAMD Family 25 Model 1 Stepping 0
+	Microarchitecture: Zen 3
+	Frequency (GHz): -0.00
+	Number of physical packages: 1
+	Number of physical CPUs: 2
+	Number of logical CPUs: 2
+	Graphics card #0 name: Virtio SCSI
+	Graphics card #0 vendor: Red Hat, Inc. (0x1af4)
+	Graphics card #0 VRAM (MB): 0.00
+	Graphics card #0 deviceId: 0x1004
+	Graphics card #0 versionInfo: unknown
+	Graphics card #1 name: Device
+	Graphics card #1 vendor: Google, Inc. (0x1ae0)
+	Graphics card #1 VRAM (MB): 0.00
+	Graphics card #1 deviceId: 0xa002
+	Graphics card #1 versionInfo: unknown
+	Virtual memory max (MB): 3973.33
+	Virtual memory used (MB): 1809.34
+	Swap memory total (MB): 0.00
+	Swap memory used (MB): 0.00
+	JVM Flags: 1 total; -Xmx4G
+	Fabric Mods: 
+		appleskin: AppleSkin 2.4.1+mc1.19
+		audioplayer: AudioPlayer 1.19.2-1.4.5
+		axesareweapons: Axes Are Weapons 1.6.0
+		badpackets: Bad Packets 0.2.0
+		balm-fabric: Balm 4.5.2+0
+		bookshelf: Bookshelf 16.2.16
+		c2me: Concurrent Chunk Management Engine 0.2.0+alpha.9.0
+			c2me-base: Concurrent Chunk Management Engine (Base) 0.2.0+alpha.9.0
+			c2me-fixes-chunkio-threading-issues: Concurrent Chunk Management Engine (Fixes/Chunk IO/Threading Issues) 0.2.0+alpha.9.0
+			c2me-fixes-general-threading-issues: Concurrent Chunk Management Engine (Fixes/General/Threading Issues) 0.2.0+alpha.9.0
+			c2me-fixes-worldgen-threading-issues: Concurrent Chunk Management Engine (Fixes/WorldGen/Threading Issues) 0.2.0+alpha.9.0
+			c2me-fixes-worldgen-vanilla-bugs: Concurrent Chunk Management Engine (Fixes/WorldGen/Vanilla Bugs) 0.2.0+alpha.9.0
+			c2me-notickvd: Concurrent Chunk Management Engine (No Tick View Distance) 0.2.0+alpha.9.0
+			c2me-opts-allocs: Concurrent Chunk Management Engine (Optimizations/Memory Allocations) 0.2.0+alpha.9.0
+			c2me-opts-chunk-access: Concurrent Chunk Management Engine (Optimizations/Chunk Access) 0.2.0+alpha.9.0
+			c2me-opts-chunkio: Concurrent Chunk Management Engine (Optimizations/Chunk IO) 0.2.0+alpha.9.0
+			c2me-opts-math: Concurrent Chunk Management Engine (Optimizations/Math) 0.2.0+alpha.9.0
+			c2me-opts-scheduling: Concurrent Chunk Management Engine (Optimizations/Scheduling) 0.2.0+alpha.9.0
+			c2me-opts-worldgen-general: Concurrent Chunk Management Engine (Optimizations/General WorldGen) 0.2.0+alpha.9.0
+			c2me-opts-worldgen-vanilla: Concurrent Chunk Management Engine (Optimizations/Vanilla WorldGen) 0.2.0+alpha.9.0
+			c2me-rewrites-chunkio: Concurrent Chunk Management Engine (Rewrites/Chunk IO) 0.2.0+alpha.9.0
+			c2me-server-utils: Concurrent Chunk Management Engine (Server Utils) 0.2.0+alpha.9.0
+			c2me-threading-chunkio: Concurrent Chunk Management Engine (Threading/WorldGen) 0.2.0+alpha.9.0
+			c2me-threading-lighting: Concurrent Chunk Management Engine (Threading/Lighting) 0.2.0+alpha.9.0
+			c2me-threading-scheduling: Concurrent Chunk Management Engine (Threading/Scheduling) 0.2.0+alpha.9.0
+			c2me-threading-worldgen: Concurrent Chunk Management Engine (Threading/WorldGen) 0.2.0+alpha.9.0
+			com_electronwill_night-config_core: core 3.6.5
+			com_electronwill_night-config_toml: toml 3.6.5
+			com_ibm_async_asyncutil: asyncutil 0.1.0
+			net_objecthunter_exp4j: exp4j 0.4.8
+			org_threadly_threadly: threadly 7.0
+		chunky: Chunky 1.3.38
+		cloth-config: Cloth Config v8 8.2.88
+			cloth-basic-math: cloth-basic-math 0.6.1
+		ctov: ChoiceTheorem's Overhauled Villages 3.1.2
+		debugify: Debugify 2.7.1
+			com_github_llamalad7_mixinextras: mixinextras 0.0.12
+		diggusmaximus: Diggus Maximus 1.5.8-1.19
+			kyrptconfig: Kyrpt Config 1.4.14-1.19
+		dynmap: Dynmap 3.5-beta-1
+		enchantment_lore: Enchantment Lore 1.3.0-b1
+			crowdin-translate: CrowdinTranslate 1.4+1.19
+		extended_armor_bars: Extended Armor Bars 1.2.1
+		fabric-api: Fabric API 0.63.0+1.19.2
+			fabric-api-base: Fabric API Base 0.4.12+93d8cb8290
+			fabric-api-lookup-api-v1: Fabric API Lookup API (v1) 1.6.10+93d8cb8290
+			fabric-biome-api-v1: Fabric Biome API (v1) 9.0.18+c6af733c90
+			fabric-command-api-v1: Fabric Command API (v1) 1.2.12+f71b366f90
+			fabric-command-api-v2: Fabric Command API (v2) 2.1.8+93d8cb8290
+			fabric-commands-v0: Fabric Commands (v0) 0.2.29+df3654b390
+			fabric-containers-v0: Fabric Containers (v0) 0.1.35+df3654b390
+			fabric-content-registries-v0: Fabric Content Registries (v0) 3.3.2+624e468e90
+			fabric-convention-tags-v1: Fabric Convention Tags 1.1.2+93d8cb8290
+			fabric-crash-report-info-v1: Fabric Crash Report Info (v1) 0.2.6+aeb40ebe90
+			fabric-data-generation-api-v1: Fabric Data Generation API (v1) 5.2.1+b598f4ac90
+			fabric-dimensions-v1: Fabric Dimensions API (v1) 2.1.32+0dd10df690
+			fabric-entity-events-v1: Fabric Entity Events (v1) 1.4.19+9ff28f4090
+			fabric-events-interaction-v0: Fabric Events Interaction (v0) 0.4.29+c6af733c90
+			fabric-events-lifecycle-v0: Fabric Events Lifecycle (v0) 0.2.29+df3654b390
+			fabric-game-rule-api-v1: Fabric Game Rule API (v1) 1.0.22+c6af733c90
+			fabric-item-api-v1: Fabric Item API (v1) 1.5.8+93d8cb8290
+			fabric-item-groups-v0: Fabric Item Groups (v0) 0.3.31+0c4b8d3c90
+			fabric-lifecycle-events-v1: Fabric Lifecycle Events (v1) 2.2.0+33ffe9ec90
+			fabric-loot-api-v2: Fabric Loot API (v2) 1.1.5+83a8659290
+			fabric-loot-tables-v1: Fabric Loot Tables (v1) 1.1.8+9e7660c690
+			fabric-message-api-v1: Fabric Message API (v1) 5.0.4+93d8cb8290
+			fabric-mining-level-api-v1: Fabric Mining Level API (v1) 2.1.16+33fbc73890
+			fabric-networking-api-v1: Fabric Networking API (v1) 1.2.5+c6af733c90
+			fabric-networking-v0: Fabric Networking (v0) 0.3.22+df3654b390
+			fabric-object-builder-api-v1: Fabric Object Builder API (v1) 4.0.13+93d8cb8290
+			fabric-particles-v1: Fabric Particles (v1) 1.0.11+79adfe0a90
+			fabric-registry-sync-v0: Fabric Registry Sync (v0) 0.9.26+c6af733c90
+			fabric-rendering-data-attachment-v1: Fabric Rendering Data Attachment (v1) 0.3.15+aeb40ebe90
+			fabric-rendering-fluids-v1: Fabric Rendering Fluids (v1) 3.0.8+c6af733c90
+			fabric-resource-conditions-api-v1: Fabric Resource Conditions API (v1) 2.1.0+aae9039d90
+			fabric-resource-loader-v0: Fabric Resource Loader (v0) 0.7.1+0c4b8d3c90
+			fabric-screen-handler-api-v1: Fabric Screen Handler API (v1) 1.3.1+1cc24b1b90
+			fabric-transfer-api-v1: Fabric Transfer API (v1) 2.1.1+93d8cb8290
+			fabric-transitive-access-wideners-v1: Fabric Transitive Access Wideners (v1) 1.3.1+42d99c3290
+		fabric-language-kotlin: Fabric Language Kotlin 1.8.5+kotlin.1.7.20
+			org_jetbrains_kotlin_kotlin-reflect: kotlin-reflect 1.7.20
+			org_jetbrains_kotlin_kotlin-stdlib: kotlin-stdlib 1.7.20
+			org_jetbrains_kotlin_kotlin-stdlib-jdk7: kotlin-stdlib-jdk7 1.7.20
+			org_jetbrains_kotlin_kotlin-stdlib-jdk8: kotlin-stdlib-jdk8 1.7.20
+			org_jetbrains_kotlinx_atomicfu-jvm: atomicfu-jvm 0.18.4
+			org_jetbrains_kotlinx_kotlinx-coroutines-core-jvm: kotlinx-coroutines-core-jvm 1.6.4
+			org_jetbrains_kotlinx_kotlinx-coroutines-jdk8: kotlinx-coroutines-jdk8 1.6.4
+			org_jetbrains_kotlinx_kotlinx-datetime-jvm: kotlinx-datetime-jvm 0.4.0
+			org_jetbrains_kotlinx_kotlinx-serialization-cbor-jvm: kotlinx-serialization-cbor-jvm 1.4.1
+			org_jetbrains_kotlinx_kotlinx-serialization-core-jvm: kotlinx-serialization-core-jvm 1.4.1
+			org_jetbrains_kotlinx_kotlinx-serialization-json-jvm: kotlinx-serialization-json-jvm 1.4.1
+		fabrication: Fabrication 3.1.4+1.19
+		fabricloader: Fabric Loader 0.14.11
+		fallingtree: FallingTree 3.10.0
+		ferritecore: FerriteCore 4.2.1
+		flesh2leather: Flesh2Leather 1.0.3+1.19.2
+		forgeconfigapiport: Forge Config API Port 4.2.6
+		iceberg: Iceberg 1.0.46
+		image2map: Image2Map 0.3.0
+			map-canvas-api: Map Canvas API 0.2.0+1.19.1
+			sgui: sgui 1.1.5+1.19.1
+		incendium: Incendium + Seed Fix 5.1.0
+		jamlib: JamLib 0.4.4
+		java: OpenJDK 64-Bit Server VM 17
+		konkrete: Konkrete 1.5.2
+		krypton: Krypton 0.2.1
+			com_velocitypowered_velocity-native: velocity-native 3.1.2-SNAPSHOT
+		lazydfu: LazyDFU 0.1.3
+		megane: megane 8.3.0
+			megane-api: megane-api 8.3.0
+			megane-fabric-transfer: megane-fabric-transfer 8.3.0
+			megane-runtime: megane-runtime 8.3.0
+			megane-vanilla: megane-vanilla 8.3.0
+		memoryleakfix: memory Leak Fix 1.19.2-0.7.1
+		minecraft: Minecraft 1.19.2
+		moremusic: More Music 0.1.3+1.19
+		netherportalfix: NetherPortalFix 10.0.0
+		notenoughcrashes: Not Enough Crashes 4.1.8+1.19.2
+		philips_ruins__fabric: Philips ruins 1.19.2 fabric 1.8
+		repurposed_structures: Repurposed Structures 6.1.1+1.19
+			midnightlib: MidnightLib 0.5.2
+		smoothboot: Smooth Boot 1.19-1.7.1
+		sound_physics_remastered: Sound Physics Remastered 1.19.2-1.0.18
+		starlight: Starlight 1.1.1+fabric.ae22326
+		structory: Structory 1.0.1
+		t_and_t: Towns and Towers - Structure Add-on 1.8
+		taxfreelevels: Tax Free Levels 1.3.3
+		terralith: Terralith 2.3
+		voicechat: Simple Voice Chat 1.19.2-2.3.23
+		wildfire_gender: Wildfire's Female Gender Mod 1.19-3.0.0
+		worldedit: WorldEdit 7.2.12+6240-87f4ae1
+		wthit: wthit 5.13.1
+	Server Running: true
+	Player Count: 0 / 20; []
+	Data Packs: vanilla, Fabric Mods, file/Movable+Spawners+[EASY+MODE]+1.3.zip, file/VanillaTweaks_c366640.zip, file/consistent phantom drops, file/double shulker shells v1.3.3.zip, file/qptp-v1-4.zip, file/unlock all recipes v2.0.4.zip, file/armored elytra v1.0.6.zip, file/multiplayer sleep v2.6.3.zip, file/player head drops v1.1.3.zip, file/tpa v2.3.3.zip, file/track raw statistics v1.5.3.zip
+	World Generation: Experimental
+	Is Modded: Definitely; Server brand changed to 'fabric'
+	Type: Dedicated Server (map_server.txt)
+	Suspected Mods: None
